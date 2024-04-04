@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Weather.css";
 import sun from "../../assets/icons/sun.svg";
 
