@@ -15,6 +15,7 @@ function App() {
   // Définition de deux états à l'aide du hook useState.
   const [weatherData , setWeatherData] = useState([]); // Stocke les données météorologiques.
   const [isDataLoaded, setIsDataLoaded] = useState(false); // Indique si les données sont chargées.
+  const [city, setCity] = useState('lyon'); // Indique si les données sont chargées.
 
   // Récupération des variables d'environnement pour l'URL de l'API météo et la clé API.
   const apiUrl = process.env.REACT_APP_WEATHER_API_URL;
@@ -52,8 +53,19 @@ function App() {
       <div className="row">
         <div className="col s12 m6 push-m3">
           <div className="weather card blue-grey darken-1">
-            <Weather /> {/* Affiche le composant Weather. */}
+            {isDataLoaded ? (
+              <>
+
+            <Weather
+             city={city}
+            tempC={weatherData.forecast.forecastDay[0].day.avgtemp_c}
+            wind={weatherData.forecast.forecastDay[0].day.avgvis_km}
+            windDegree={weatherData.forecast.forecastDay[0].hour[0].wind_Degree}/> {/* Affiche le composant Weather. */}
             <Days handleClickDay={handleClickDay} /> {/* Affiche le composant Days et passe la fonction handleClickDay en tant que prop. */}
+          </> 
+           ) : (
+              <p>Chargement...</p>
+              )}
           </div>
         </div>
       </div>
